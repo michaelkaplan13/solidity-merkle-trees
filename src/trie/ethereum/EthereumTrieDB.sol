@@ -1,4 +1,4 @@
-pragma solidity 0.8.17;
+pragma solidity 0.8.18;
 
 import "../Node.sol";
 import "../Bytes.sol";
@@ -14,7 +14,7 @@ library EthereumTrieDB {
 
     bytes constant HASHED_NULL_NODE = hex"56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421";
 
-    function decodeNodeKind(bytes memory encoded) external pure returns (NodeKind memory) {
+    function decodeNodeKind(bytes memory encoded) internal pure returns (NodeKind memory) {
         NodeKind memory node;
         ByteSlice memory input = ByteSlice(encoded, 0);
         if (Bytes.equals(encoded, HASHED_NULL_NODE)) {
@@ -48,7 +48,7 @@ library EthereumTrieDB {
         return node;
     }
 
-    function decodeLeaf(NodeKind memory node) external pure returns (Leaf memory) {
+    function decodeLeaf(NodeKind memory node) internal pure returns (Leaf memory) {
         Leaf memory leaf;
         RLPReader.RLPItem[] memory decoded = node.data.data.toRlpItem().toList();
         bytes memory data = decoded[1].toBytes();
@@ -59,7 +59,7 @@ library EthereumTrieDB {
         return leaf;
     }
 
-    function decodeExtension(NodeKind memory node) external pure returns (Extension memory) {
+    function decodeExtension(NodeKind memory node) internal pure returns (Extension memory) {
         Extension memory extension;
         RLPReader.RLPItem[] memory decoded = node.data.data.toRlpItem().toList();
         bytes memory data = decoded[1].toBytes();
@@ -70,7 +70,7 @@ library EthereumTrieDB {
         return extension;
     }
 
-    function decodeBranch(NodeKind memory node) external pure returns (Branch memory) {
+    function decodeBranch(NodeKind memory node) internal pure returns (Branch memory) {
         Branch memory branch;
         RLPReader.RLPItem[] memory decoded = node.data.data.toRlpItem().toList();
 

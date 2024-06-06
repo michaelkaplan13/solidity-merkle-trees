@@ -1,3 +1,5 @@
+> **This is a fork of @polytope-labs/solidity-merkle-trees which slims the Merkle Tree Solidity libraries down to Ethereum-only utilities, and converts the library methods to be `internal` such that they do not be independently deployed and invoked using a `delegatecall`. It also increases the Solidity version requirement to 0.8.18**
+
 # `@polytope-labs/solidity-merkle-trees`
 
 ![Unit Tests](https://github.com/polytope-labs/solidity-merkle-trees/actions/workflows/test.yml/badge.svg)
@@ -72,7 +74,6 @@ You can derive the k-indices for the mmr leaves using this rust lib [polytope-la
 
 This library also supports the verification of the different styles of merkle patricia tries:
 
-- [x] Substrate
 - [x] Ethereum
 - [ ] NEAR
       <br />
@@ -83,15 +84,6 @@ pragma solidity ^0.8.0;
 import "@polytope-labs/solidity-merkle-trees/MerklePatricia.sol";
 
 contract YourContract {
-    function verifySubstrateProof(
-        bytes32 root,
-        bytes[] memory proof,
-        bytes[] memory keys,
-    ) public {
-        bytes[] values = MerklePatricia.VerifySubstrateProof(root, proof, keys); // verifies proofs from state.getReadProof
-        // do something with the verified values.
-    }
-
     function verifyEthereumProof(
         bytes32 root,
         bytes[] memory proof,

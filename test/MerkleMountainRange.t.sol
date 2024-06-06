@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.17;
+pragma solidity 0.8.18;
 
 import "forge-std/Test.sol";
 import "../src/MerkleMountainRange.sol";
 
 contract MerkleMountainRangeTest is Test {
-
     function setUp() public {}
 
     // This unit test showcases how to use the MMR contract
